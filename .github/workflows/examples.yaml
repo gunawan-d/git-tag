@@ -1,0 +1,32 @@
+name: Deploy on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggered tag yang dimulai dengan v (ex: v1.0.0)
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js (optional jika pakai node)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build project
+        run: |
+          npm run build
+
+      - name: Deploy (dummy)
+        run: |
+          echo "🚀 Deploying version ${{ github.ref_name }} to production..."
