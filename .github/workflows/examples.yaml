@@ -13,4 +13,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy dummy
-        run: echo "✅ Deployed tag: ${{ github.ref_name }}"
+        run: echo '✅ Deployed tag ${{ github.ref_name }} successfully!'
