@@ -1,0 +1,20 @@
+name: Rollback by Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag version deploy'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag }}
+
+      - name: Deploy dummy
+        run: echo "✅ Deploy manual for tag ${{ github.event.inputs.tag }} berhasil!"
