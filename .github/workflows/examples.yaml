@@ -1,11 +1,41 @@
 name: Deploy on Tag
 
 on:
-  push:
-    tags:
-      - 'v*'
+    pull_request:
+        branches:
+          - master
 
 jobs:
+  create-tag:
+    if: github.event.pull_request.merged == true
+    name: Create Version Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Generate Tag Name
+        id: tag
+        run: |
+          props=$(cat app-version.properties)
+          version_major=$(echo "$props" | grep -E "version_major=" | cut -d'=' -f2)
+          version_minor=$(echo "$props" | grep -E "version_minor=" | cut -d'=' -f2)
+          version_patch=$(echo "$props" | grep -E "version_patch=" | cut -d'=' -f2)
+          tag="v$version_major.$version_minor.$version_patch"
+          echo "Generated tag: $tag"
+          echo "name=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Push Git Tag
+        run: |
+          git fetch --tags
+          git tag ${{ steps.tag.outputs.name }}
+          git push origin ${{ steps.tag.outputs.name }}
+
   deploy:
     runs-on: ubuntu-latest
     steps:
