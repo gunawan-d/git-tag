@@ -106,3 +106,8 @@ graph TD
 - Workflow hanya berjalan saat PR ke `master` di-merge (bukan di-close tanpa merge).
 
   
+| Commit                                                | Hasil versi |
+| ----------------------------------------------------- | ----------- |
+| `fix: bug X`                                          | PATCH 0.2.1 |
+| `feat: fitur baru`                                    | MINOR 0.3.0 |
+| `feat!: breaking change` + `BREAKING CHANGE:` in body | MAJOR 1.0.0 |
