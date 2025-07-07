@@ -1,9 +1,0 @@
-{
-"bumpFiles": [
-    {
-      "filename": "version.json",
-      "type": "json"
-    }
-  ],
-  "releaseCommitMessageFormat": "chore(release): release {{currentTag}}"
-}

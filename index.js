@@ -8,7 +8,7 @@ app.get('/', function (req, res) {
 app.get('/will', function (req, res) {
     res.send('{ "response": "Hello Kamu" }');
 });
-app.get('/ready', function (req, res) {
+app.get('/health', function (req, res) {
     res.send('{ "response": " Great!, It works!" }');
 });
 app.get('/healthcheck', function (req, res) {
