@@ -104,3 +104,5 @@ graph TD
 **Catatan:**  
 - Pastikan file `app-version.properties` selalu di-update sebelum merge ke `master`.
 - Workflow hanya berjalan saat PR ke `master` di-merge (bukan di-close tanpa merge).
+
+  
