@@ -26,5 +26,4 @@ jobs:
             sudo docker stop backend-nodeapp || true &&
             sudo docker rm backend-nodeapp || true &&
             sudo docker run -d --name backend-nodeapp -p 3010:3000 gunawand/nodeapp:${{ github.event.inputs.tag }}
-          "udo docker run -d --name backend-nodeapp -p 3010:3000 gunawand/nodeapp:${{ needs.create-tag.outputs.tag_name }}
           "
