@@ -67,8 +67,8 @@ jobs:
         file: Dockerfile
         push: true
         tags: |
-          gunawand/learn-git-tag:latest
-          gunawand/learn-git-tag:${{ needs.create-tag.outputs.tag_name }}
+          gunawand/nodeapp:latest
+          gunawand/nodeapp:${{ needs.create-tag.outputs.tag_name }}
   
   deploy:
     runs-on: ubuntu-latest
