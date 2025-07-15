@@ -4,17 +4,26 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag version deploy'
+        description: 'Tag version deploy (example : 0.0.5)'
         required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: tencent-igunawan
     steps:
-      - name: Checkout source
+      - name: Checkout repo
         uses: actions/checkout@v4
+      
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          ref: ${{ github.event.inputs.tag }}
-
-      - name: Deploy dummy
-        run: echo "✅ Deploy manual for tag ${{ github.event.inputs.tag }} berhasil!"
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: SSH Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+            sudo docker pull gunawand/nodeapp:${{ needs.create-tag.outputs.tag_name }} &&
+            sudo docker stop backend-nodeapp || true &&
+            sudo docker rm backend-nodeapp || true &&
+            sudo docker run -d --name backend-nodeapp -p 3010:3000 gunawand/nodeapp:${{ needs.create-tag.outputs.tag_name }}
+          "
