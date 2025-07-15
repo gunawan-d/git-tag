@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-    res.send('{ "response": "Hello From Gunawan ini Version 0.0.5" }');
+    res.send('{ "response": "Hello From Gunawan ini Version 0.0.7" }');
 });
 
 app.get('/will', function (req, res) {
