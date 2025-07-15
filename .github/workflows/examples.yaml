@@ -84,6 +84,6 @@ jobs:
       - name: SSH Deploy
         run: |
           ssh -o StrictHostKeyChecking=no -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
-            sudo docker pull gunawand/front-maintenance:${{ needs.create-tag.outputs.tag_name }} &&
+            sudo docker pull gunawand/nodeapp:${{ needs.create-tag.outputs.tag_name }} &&
             sudo docker restart backend-nodeapp
           "
